@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageButton;
 
 public class Webview extends AppCompatActivity {
@@ -14,6 +15,9 @@ public class Webview extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
+
+        WebView myWebView = findViewById(R.id.webview);
+        myWebView.loadUrl("https://www.arcgis.com/apps/PublicInformation/index.html?appid=021e76e31e35471a821ce69241994115");
 
         lista = findViewById(R.id.lista);
         lista.setOnClickListener(new View.OnClickListener() {

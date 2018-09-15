@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IncidenciaActivity">
+    tools:context=".IncidenciaActivity"
+    android:background="#f0f0f0">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -36,4 +37,131 @@
             android:layout_marginEnd="30dp"
             android:background="@drawable/ic_cloud_black_24dp" />
     </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="257dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="109dp">
+
+        <TextView
+            android:id="@+id/txthardcode"
+            android:layout_width="164dp"
+            android:layout_height="83dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="AREQUIPA - Arequipa - Yura: Movimiento Sísmico Mag. 5.8 (Reporte Complementario 01)"
+            android:textAlignment="center"></TextView>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="0dp"
+            app:srcCompat="@drawable/e" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="257dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp">
+
+        <TextView
+            android:id="@+id/txthardcode1"
+            android:layout_width="164dp"
+            android:layout_height="83dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="MADRE DE DIOS - Tambopata - Las Piedras: Incendio Forestal (Reporte Preliminar)"
+            android:textAlignment="center"></TextView>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="0dp"
+            app:srcCompat="@drawable/fire" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="257dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp">
+
+        <TextView
+            android:id="@+id/txthardcode3"
+            android:layout_width="164dp"
+            android:layout_height="83dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="UCAYALI - Crl Portillo - Manantay (Guadalupe): Incendio Urbano (Reporte Complementario 01)"
+            android:textAlignment="center"></TextView>
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="0dp"
+            app:srcCompat="@drawable/fire" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="257dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="290dp">
+
+        <TextView
+            android:id="@+id/txthardcode4"
+            android:layout_width="164dp"
+            android:layout_height="83dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="HUANCAVELICA - Tayacaja - Pampas (Viñas) : Deslizamiento (Reporte Complementario 01))"
+            android:textAlignment="center"></TextView>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="0dp"
+            app:srcCompat="@drawable/fire" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="257dp"
+        android:layout_height="80dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="380dp">
+
+        <TextView
+            android:id="@+id/txthardcode5"
+            android:layout_width="164dp"
+            android:layout_height="83dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="MADRE DE DIOS - Tambopata - Las Piedras: Incendio Forestal (Reporte Preliminar)"
+            android:textAlignment="center"></TextView>
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="0dp"
+            app:srcCompat="@drawable/sand" />
+    </android.support.v7.widget.CardView>
+
+
 </RelativeLayout>
