@@ -1,6 +1,7 @@
 package com.prevencionpositiva;
 
 import android.content.Intent;
+import android.os.CountDownTimer;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,21 +17,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        siguiente();
+    }
+
+    private void siguiente() {
+        new CountDownTimer(3000,1000){
+
             @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Holi", Toast.LENGTH_SHORT).show();
+            public void onTick(long millisUntilFinished) {
+
             }
-        });
-*/
-        btn_agricola = findViewById(R.id.btn_agricola);
-        btn_agricola.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AgricolaActivity.class);
+            public void onFinish() {
+                Intent intent = new Intent(MainActivity.this,IncidenciaActivity.class);
                 startActivity(intent);
+
             }
-        });
+        }.start();
     }
 }

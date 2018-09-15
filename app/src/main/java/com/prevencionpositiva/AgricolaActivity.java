@@ -11,10 +11,13 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.provider.Settings;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,13 +25,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -52,6 +53,7 @@ public class AgricolaActivity extends FragmentActivity implements OnMapReadyCall
     double log = 0.0;
     LatLng latLng;
     MarkerOptions markerOptions = new MarkerOptions();
+    ImageButton lista,riesgo,clima;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,41 @@ public class AgricolaActivity extends FragmentActivity implements OnMapReadyCall
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AgricolaActivity.this,CalendarioActivity.class);
+                startActivity(intent);
+            }
+        });
+        lista = findViewById(R.id.lista);
+        lista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AgricolaActivity.this,IncidenciaActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        riesgo = findViewById(R.id.riesgo);
+        riesgo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AgricolaActivity.this,Webview.class);
+                startActivity(intent);
+            }
+        });
+
+        clima = findViewById(R.id.clima);
+        clima.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AgricolaActivity.this,AgricolaActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -79,6 +116,47 @@ public class AgricolaActivity extends FragmentActivity implements OnMapReadyCall
         } catch (Resources.NotFoundException e) {
             Log.e("", "Can't find style. Error: ", e);
         }
+
+        LatLng sydney = new LatLng( -12.077517, -77.07928);
+
+        googleMap.addMarker(new MarkerOptions().position(sydney)
+                .title("Clima").icon(BitmapDescriptorFactory.fromResource(R.drawable.cloud)));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+
+
+        String url = "http://api.openweathermap.org/data/2.5/weather?lat=-12.082176&lon=-77.085214&lang=es&appid=3a2ac70cc5baff47027c8853167245c2";
+        RequestQueue queue = Volley.newRequestQueue(AgricolaActivity.this);
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET,url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                    try {
+                        JSONArray ja = response.getJSONArray("main");
+                        Toast.makeText(AgricolaActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
+                        for(int i=0;i<ja.length();i++){
+                            try {
+                                JSONObject encuesta = ja.getJSONObject(i);
+                                String titulo = encuesta.getString("pressure");
+                                String dirigidos = encuesta.getString("humidity");
+                                Toast.makeText(AgricolaActivity.this, titulo+"  "+dirigidos, Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(AgricolaActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        queue.add(stringRequest);
+
 
         miUbicacion();
     }
@@ -112,8 +190,6 @@ public class AgricolaActivity extends FragmentActivity implements OnMapReadyCall
         LatLng asd = new LatLng(lat, log);
         Marker MiUbicación = mMap.addMarker(new MarkerOptions().position(asd).title("Mi Ubicación").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(asd, 15));
-        UiSettings ui = mMap.getUiSettings();
-        ui.setZoomControlsEnabled(true);
     }
 
     public void actulizarMarker(Location location) {
@@ -121,49 +197,8 @@ public class AgricolaActivity extends FragmentActivity implements OnMapReadyCall
             lat = location.getLatitude();
             log = location.getLongitude();
             agregarMarcador(lat, log);
-            //Toast.makeText(this, lat+""+log, Toast.LENGTH_SHORT).show();
-            String url = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+log+"&lang=es&appid=3a2ac70cc5baff47027c8853167245c2";
-            RequestQueue queue = Volley.newRequestQueue(AgricolaActivity.this);
-            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET,url, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                        try {
-                            JSONArray ja = response.getJSONArray("coord");
-                            for(int i=0;i<ja.length();i++){
-                                try {
-                                    JSONObject encuesta = ja.getJSONObject(i);
-                                    Double asd1 = encuesta.getDouble("lat");
-                                    Double asd = encuesta.getDouble("lon");
-                                    latLng = new LatLng(asd1, asd);
-                                    addMarker(latLng,"Clima");
-                                    //Toast.makeText(AgricolaActivity.this, encuesta.getString("humidity"), Toast.LENGTH_SHORT).show();
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                }
-            }, new Response.ErrorListener(){
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(AgricolaActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            });
-
-            queue.add(stringRequest);
         }
-
     }
-
-    private void addMarker(LatLng latlng, final String title) {
-        markerOptions.position(latlng);
-        markerOptions.title(title);
-        mMap.addMarker(markerOptions);
-        //OnMarke
-    }
-
 
     LocationListener locListener = new LocationListener() {
         @Override

@@ -40,7 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Webview"></activity>
+        <activity android:name=".Webview" />
+        <activity android:name=".CalendarioActivity" />
+        <activity android:name=".IncidenciaActivity"></activity>
     </application>
 
 </manifest>

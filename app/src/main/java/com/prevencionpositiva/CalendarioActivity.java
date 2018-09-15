@@ -6,20 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class Webview extends AppCompatActivity {
+public class CalendarioActivity extends AppCompatActivity {
     ImageButton lista,riesgo,clima;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview);
-
+        setContentView(R.layout.activity_calendario);
         lista = findViewById(R.id.lista);
         lista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Webview.this,IncidenciaActivity.class);
+                Intent intent = new Intent(CalendarioActivity.this,IncidenciaActivity.class);
                 startActivity(intent);
             }
         });
@@ -28,7 +26,7 @@ public class Webview extends AppCompatActivity {
         riesgo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Webview.this,Webview.class);
+                Intent intent = new Intent(CalendarioActivity.this,Webview.class);
                 startActivity(intent);
             }
         });
@@ -37,7 +35,7 @@ public class Webview extends AppCompatActivity {
         clima.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Webview.this,AgricolaActivity.class);
+                Intent intent = new Intent(CalendarioActivity.this,AgricolaActivity.class);
                 startActivity(intent);
             }
         });
