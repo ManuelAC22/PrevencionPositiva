@@ -4,59 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/map">
 
-
-    <Button
-        android:id="@+id/btn_agricola"
-        android:layout_width="211dp"
-        android:layout_height="66dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="125dp"
-        android:background="#00BBD3"
-        android:text="Agrícola"
-        android:textColor="#ffffff" />
-
-    <Button
-        android:id="@+id/btn_riesgos"
-        android:layout_width="211dp"
-        android:layout_height="66dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="222dp"
-        android:background="#00BBD3"
-        android:text="Riesgos"
-        android:textColor="#ffffff" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="190dp"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="end|bottom"
-        android:layout_marginBottom="29dp"
-        android:layout_marginEnd="24dp"
-        android:src="@drawable/help"
-        app:fabSize="normal"/>
-
-    <Button
-        android:id="@+id/btn_auto"
-        android:layout_width="211dp"
-        android:layout_height="66dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="183dp"
-        android:background="#00BBD3"
-        android:text="Automóvil"
-        android:textColor="#ffffff" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:id="@+id/imageView2"
+        android:layout_width="338dp"
+        android:layout_height="141dp"
         android:layout_alignParentTop="true"
-        app:srcCompat="@drawable/map" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        app:srcCompat="@drawable/logo" />
+
+
+    <ImageButton
+        android:id="@+id/btn_agricola"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_riesgos"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="43dp"
+        android:background="@drawable/pagelinesbrands" />
+
+    <ImageButton
+        android:id="@+id/btn_riesgos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/siren" />
+
+    <ImageButton
+        android:id="@+id/btn_auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_agricola"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="27dp"
+        android:background="@drawable/carcrashsolid" />
+
 </RelativeLayout>
