@@ -17,6 +17,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,11 +35,15 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class AgricolaActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     String direccion;
@@ -40,11 +51,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     double lat = 0.0;
     double log = 0.0;
     LatLng latLng;
+    MarkerOptions markerOptions = new MarkerOptions();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_agricola);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -109,10 +121,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             lat = location.getLatitude();
             log = location.getLongitude();
             agregarMarcador(lat, log);
-            Log.d("asd",lat+"  "+log);
+            //Toast.makeText(this, lat+""+log, Toast.LENGTH_SHORT).show();
+            String url = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+log+"&lang=es&appid=3a2ac70cc5baff47027c8853167245c2";
+            RequestQueue queue = Volley.newRequestQueue(AgricolaActivity.this);
+            JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.GET,url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray ja = response.getJSONArray("coord");
+                            for(int i=0;i<ja.length();i++){
+                                try {
+                                    JSONObject encuesta = ja.getJSONObject(i);
+                                    Double asd1 = encuesta.getDouble("lat");
+                                    Double asd = encuesta.getDouble("lon");
+                                    latLng = new LatLng(asd1, asd);
+                                    addMarker(latLng,"Clima");
+                                    //Toast.makeText(AgricolaActivity.this, encuesta.getString("humidity"), Toast.LENGTH_SHORT).show();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                }
+            }, new Response.ErrorListener(){
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(AgricolaActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
+            queue.add(stringRequest);
         }
 
     }
+
+    private void addMarker(LatLng latlng, final String title) {
+        markerOptions.position(latlng);
+        markerOptions.title(title);
+        mMap.addMarker(markerOptions);
+        //OnMarke
+    }
+
 
     LocationListener locListener = new LocationListener() {
         @Override
