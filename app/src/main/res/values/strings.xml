@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Prevención Posotiva</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_agricola">Agrícola</string>
+    <string name="title_riesgo">Zona Riesgo</string>
+    <string name="title_auto">Autómovil</string>
 </resources>
